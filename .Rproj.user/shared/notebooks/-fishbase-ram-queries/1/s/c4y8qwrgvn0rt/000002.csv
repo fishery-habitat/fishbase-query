@@ -1,0 +1,11 @@
+"0","fb.all.subset <- fb.all %>% 
+  filter_at(vars(Fresh:MarshesSwamps), is.na(all_vars(.)))
+"
+"2","is.na() applied to non-(list or vector) of type 'language'"
+"2","Error: `.vars_predicate` must be a function or a call to `all_vars()` or `any_vars()`, not a logical vector.
+"
+"2","In addition: "
+"2","Warning message:
+"
+"2","Unknown or uninitialised column: `load`. 
+"

@@ -1,0 +1,12 @@
+"0","fb.spawning.subset <- fb.spawning.table %>% 
+  select(""SpecCode"", ""Species"", ""SpawningGround"") %>% # chose not to include spawning area
+  filter(SpawningGround %in% c(""coastal"", ""estuarine"")) %>%  #coastal and estuarine spawners 
+  unique(.) %>% 
+  mutate(spawner = -1) %>% 
+  pivot_wider(names_from = SpawningGround, values_from = spawner) %>% 
+  group_by(SpecCode, Species) %>% 
+  summarize(Coastal_Spawner = sum(coastal, na.rm = T),
+            Estuarine_Spawner = sum(estuarine, na.rm = T)) # That was a dumb way to do that but whatever
+"
+"2","`summarise()` regrouping output by 'SpecCode' (override with `.groups` argument)
+"

@@ -1,0 +1,6 @@
+"0","# Load the RAM legacy database workspace v4.491:"
+"0","load(""DBdata[asmt][v4.491].RData"")"
+"0",""
+"0","# The species list can easily be retrieved from the stock or metadata tables:"
+"0","# Save the species list as ram.sp"
+"0","ram.sp <- unique(stock$scientificname) # 361 species in the RAM database"

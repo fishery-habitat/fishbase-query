@@ -1,0 +1,5 @@
+"0","# How many species make up those 30 stocks?
+potential_mang.sp2 <- unique(ram_fb_$Sscientificname) # 26 different species
+"
+"2","Error in unique(ram_fb_$Sscientificname) : object 'ram_fb_' not found
+"

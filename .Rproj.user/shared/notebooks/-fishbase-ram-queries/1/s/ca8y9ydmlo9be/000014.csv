@@ -1,0 +1,6 @@
+"0","# How many stocks make up those 7 species?
+fbram.mang.stocks <- ram.fao.subset[which(ram.fao.subset$scientificname %in% fb.mang.inram$Species)]
+"
+"2","Error in `[.data.frame`(ram.fao.subset, which(ram.fao.subset$scientificname %in%  : 
+  undefined columns selected
+"

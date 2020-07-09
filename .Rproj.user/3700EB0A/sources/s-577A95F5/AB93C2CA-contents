@@ -1,0 +1,204 @@
+---
+title: "Sedimentation Data - Initial Analyses"
+author: "Cori Lopazanski"
+date: "11/8/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, error = FALSE)
+# Attach Packages
+library(tidyverse)
+library(janitor)
+library(lubridate)
+
+# Description of changes made in Excel prior to reading in the master data: 
+# Manually updated the column names to reflect the species name listed in the header - ex: "Genus species" was converted to "#_gen_spe" for the number column, and "wt_gen_spe" for the weight column. In the case that a specific scientific name wasn't listed, I included either the common name (if listed) or the family if it was the only listed member of that family.
+# Saved as "sed_data_variables_corrected_20191108_CJL.csv"
+
+
+# Read in data
+sed_data <- read_csv("sed_data_variables_corrected_20191108_CJL.csv", skip = 3) %>%  # read in data, skip header
+  clean_names() %>% # convert names to lowercase_snake_case
+  select(qa_qc:wt_catfish_spp)  # select all but the two end empty columns with nothing
+
+```
+
+***
+### Wrangle data to convert to R-friendly format
+```{r}
+# Make a dataframe that will put species, type of value (wt or number), and the value itself in three separate columns (tidy format)
+sed_long <- sed_data %>%  
+  mutate(obs_id = c(1:length(qa_qc))) %>% # create an id column for each observation 
+  pivot_longer(number_ang_ros:wt_catfish_spp, # gather the species columns
+               names_to = "name", # put the species names in one column
+               values_to = "value") %>% # put the values from the cells in another column
+  separate(name, # dissect the name to pull out the data type
+           into = c("type", "genus", "species"), # separate pieces of name
+           sep = "_") %>% 
+  unite(col = "species_name", # put the species name back together 
+        genus:species,
+        sep = "_",
+        na.rm = TRUE) %>%  # remove NAs before putting names back together 
+  mutate(sp_id = rep(1:(length(value)/2), each = 2))  # create column identifying each individual species iteration (important for next step) 
+  
+# Create a widened dataframe so that number and weight have their own column
+sed_widen <- sed_long %>% 
+  pivot_wider(id_cols = sp_id, names_from = type, values_from = value) 
+
+# Filter the id dataset so each ID is only listed once
+sed_long_filtered <- sed_long %>% 
+  filter(type == "number") 
+
+# Join the filtered ID dataset with the widened subset
+# Drop unneessary columns
+# Make a "season" column and "presence/absence" column
+# For pres_abs column: if number is zero = absent (0), if number is nonzero = present
+sed_tidy <- full_join(sed_long_filtered, sed_widen, by = "sp_id") %>% 
+  select(-sp_id, -type, -value) %>% 
+  mutate(
+    date_new = lubridate::ymd(date),
+    season =  case_when(
+      lubridate::month(date_new) %in% c("4","5", "6") ~ "spring",
+      lubridate::month(date_new) %in% c("7", "8", "9") ~ "summer",
+      lubridate::month(date_new) %in% c("10", "11", "12") ~ "fall"), 
+    pres_abs = ifelse(number == 0, 0, 1),
+    tide = case_when( # Tide is labeled both as "Falling" and "Outgoing" - fix to just "Outgoing"
+      tide == "Falling" ~ "Outgoing",
+      tide == "Outgoing" ~ "Outgoing",
+      tide == "Incoming" ~ "Incoming"))
+
+
+# Apparently sometimes "Ward" was typed as "Wards"... we correct it to just "Ward" here:
+sed_tidy$creek[sed_tidy$creek == "Wards"] <- "Ward"
+
+#Towards the end of the dataset someone stopped entering "tide" but at that point the sampling was only outgoing tide (changed sampling methods after year 1)
+sed_tidy$tide[is.na(sed_tidy$tide)] <- "Outgoing"
+
+# Fyke net "site" wasn't always entered, but it was always placed at the lower site
+sed_tidy$site[sed_tidy$sampling_method == "Fyke"] <- "Lower"
+sed_tidy$site[sed_tidy$sampling_method == "Trawl"] <- NA
+
+# For the gill nets on 2017-08-24 the site was not entered - these are the sites that correspond to the appropriate set times (in relation to the obs-id as examined in the raw data set sed_data)
+sed_tidy$site[sed_tidy$obs_id == "720" ] <- "Upper"
+sed_tidy$site[sed_tidy$obs_id == "721" ] <- "Upper"
+sed_tidy$site[sed_tidy$obs_id == "722" ] <- "Middle"
+sed_tidy$site[sed_tidy$obs_id == "723" ] <- "Middle"
+sed_tidy$site[sed_tidy$obs_id == "724" ] <- "Lower"
+sed_tidy$site[sed_tidy$obs_id == "725" ] <- "Lower"
+
+# For obs_id 3414 to 3423 (a single set of minnow traps) time in the afternoon was not entered as military time - this corrects it
+sed_tidy$time_out[sed_tidy$obs_id %in% c(3414:3423)] <- "15:31:00"
+
+# Fix some of the species names - species names changed or codes differed from master list
+sed_tidy$species_name[sed_tidy$species_name == "arrow_shrimp"] <- "toz_car"
+sed_tidy$species_name[sed_tidy$species_name == "ops_tao"] <- "ops_tau"
+sed_tidy$species_name[sed_tidy$species_name == "ast_spp"] <- "uranoscopidae"
+sed_tidy$species_name[sed_tidy$species_name == "blenny"] <- "blenniidae"
+sed_tidy$species_name[sed_tidy$species_name == "cutlassfish"] <- "trichiuridae"
+sed_tidy$species_name[sed_tidy$species_name == "cyo_neb"] <- "cyn_neb"
+sed_tidy$species_name[sed_tidy$species_name == "far_spp"] <- "pen_spp"
+sed_tidy$species_name[sed_tidy$species_name == "hyp_ame"] <- "das_ame"
+sed_tidy$species_name[sed_tidy$species_name == "hyp_sab"] <- "das_sab"
+sed_tidy$species_name[sed_tidy$species_name == "larval_eel"] <- "ang_ros"
+sed_tidy$species_name[sed_tidy$species_name == "mac_ter"] <- "mal_ter"
+sed_tidy$species_name[sed_tidy$species_name == "mic_ind"] <- "mic_und"
+sed_tidy$species_name[sed_tidy$species_name == "scaled_sardine"] <- "har_jag"
+sed_tidy$species_name[sed_tidy$species_name == "sci_spp"] <- "sciaenidae"
+sed_tidy$species_name[sed_tidy$species_name == "servanid_spp"] <- "serranidae"
+sed_tidy$species_name[sed_tidy$species_name == "sphyraena"] <- "sphyraenidae"
+sed_tidy$species_name[sed_tidy$species_name == "stro_mar"] <- "str_mar"
+
+# Create levels in seasons for graphing:
+sed_tidy$season <- factor(sed_tidy$season, levels = c("spring", "summer", "fall"))
+
+# Add "county" column
+sed_tidy <- sed_tidy %>% 
+  mutate(
+    county = case_when(creek %in% c("Tusk", "Gales", "Ward", "Oyster", "Sleepy", "Ware") ~ "Carteret",
+                       creek %in% c("Futch", "Pages", "Howe", "Hewletts", "Whiskey", "Bradley") ~ "New Hanover")
+  )
+ 
+
+## PROBLEM: For some reason, writing to a CSV means that some things turn to NAs. Not sure why. Ask Allison.
+# For all following analyses, will start by using the dataframe called: sed_tidy
+# write_csv(sed_tidy, "sed_tidy.csv")
+
+
+```
+
+***
+
+## Use the master species list information to categorize the sedimentation catches as fish & elasmobranch or not-fish
+
+```{r}
+## Use master species list to categorize as fish/not-fish and trap/trawl
+# Import master species list
+master_sp_list <- read_csv("master_sp_list_sed.csv") %>% 
+  select(field_id, common_name, species_name, family, order, common_group, sp_code)
+
+# Tidy master list
+master_sp_tidy <- master_sp_list %>% 
+  mutate(sp_code = str_to_lower(sp_code)) %>% 
+  separate(sp_code,
+           into = c("genus", "species"),
+           sep = " ") %>% 
+  unite(col = "sp_code",
+        genus:species,
+        sep = "_",
+        na.rm = TRUE)
+
+sp_group <- master_sp_tidy %>% 
+  select(sp_code, common_group) %>% 
+  rename(species_name = sp_code)
+
+# Join columns from master to the sed_tidy 
+sed_group <- left_join(sed_tidy, sp_group, by = "species_name")
+
+# Fix some NAs for species that weren't in the master list
+sed_group$common_group[sed_group$species_name == "car_sig"] <- "Elasmobranch"
+sed_group$common_group[sed_group$species_name == "catfish_spp"] <- "Pisces"
+sed_group$common_group[sed_group$species_name == "cen_und"] <- "Pisces"
+sed_group$common_group[sed_group$species_name == "dor_cep"] <- "Pisces"
+sed_group$common_group[sed_group$species_name == "hemiramphidae"] <- "Pisces"
+sed_group$common_group[sed_group$species_name == "lep_gib"] <- "Pisces"
+sed_group$common_group[sed_group$species_name == "lep_gul"] <- "Pisces"
+sed_group$common_group[sed_group$species_name == "men_ame"] <- "Pisces"
+sed_group$common_group[sed_group$species_name == "mic_tha"] <- "Pisces"
+
+
+groups <- unique(sed_group$common_group)
+
+# Create trap/trawl identifier and fish/notfish identifier
+sed_group <- sed_group %>% 
+  mutate(type = case_when(sampling_method %in% c("Minnow Trap", "Crab Pot", "Fyke", "Gill Net") ~ "trap",
+                          sampling_method == "Trawl" ~ "trawl")) %>% 
+  mutate(fish_group = if_else(common_group %in% c("Pisces", "Elasmobranch"), "fish", "not_fish")) %>% 
+  mutate(sampling_method = str_to_lower(sampling_method))
+
+
+# Make column for each individual sampling interval
+sed <- sed_group %>% 
+  mutate(yr = year(date_new)) %>% 
+  unite(col = "season_yr",
+        c(yr, season),
+        sep = "_")
+
+
+# Remove what we don't need anymore just to clean up the R environment
+rm(master_sp_list, master_sp_tidy, sp_group, sed_data, sed_long, sed_long_filtered, sed_widen)
+
+
+```
+
+
+Species accumulation curves? 
+Get a list of all the species you caught, and how many individuals you caught in each creek zone - upper oyster, 52 individual critters in nets/traps/pots and it was 10 species, over at gales you also caught 10 sp but 62 ind - populate sampling effort by individual species counts at that same resolution (UML) for separate creeks -> rarefaction approach, something noted e.s. 50, 100, 200 - diversity/richness metric that's the expected number of species per 50, 100, 200 individuals you define the number of individuals
+Maybe approach that by that game - here's what we caught, if we were to resample it, and we caught 200 critters in lower creek, what is the expected number of species?
+- Cant compare lower/upper if you include fyke net: if want to do sp rich diversity keep fyke nets out of that
+- Helps you scale things to be able to compare them for number of samples
+- Predict diversity/evenness/rarefaction curve - expected species per number of individuals resampled
+
+Eyeball graphs to get idea about % differences in catch rates across difference systems 
+
+***
