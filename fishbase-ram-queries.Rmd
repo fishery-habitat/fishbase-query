@@ -12,6 +12,7 @@ library(freeR) # where Chris Free's `fishbase` function lives
 library(tidyverse)
 library(rfishbase)
 library(here)
+library(ramlegacy) # caches RAM to make it easier to reference install_github("ropensci/ramlegacy")
 ```
 
 ***
@@ -211,4 +212,65 @@ Mangroves species list:
 * Sea mullet (Australia)
 * Mutton snapper <<< THIS ONE MIGHT BE GOOD!!
 
+#### Investigate identified stocks for "one-way trip" patterns
+```{r}
+# downloads latest version (currently 4.44)
+# download_ramlegacy()
+# load_ramlegacy()
+
+# Filter out species from identified list not included in RAM Version 4.44
+stocks.excluded <- fbram.mang.stocks %>% 
+filter(!stockid %in% c("GLGROUPSATLCGM", "LHAIRTSOJECS","MULLQNSW"))
+  
+  
+# Select only identified species from the mortality (F) RAM database 
+mortality.stocks <- f.data %>% 
+  select(stocks.excluded$stockid) %>% 
+  tibble::rownames_to_column("year") %>% 
+  gather(stockid, mortality, -year)
+
+# Select only identified species from the spawning stock (SSB) RAM database
+spawning.biomass.stocks <- ssb.data %>% 
+  select(stocks.excluded$stockid) %>% 
+  tibble::rownames_to_column("year") %>% 
+  gather(stockid, spawningbiomass, -year)
+
+# Join mortaility and biomass estimates for ease of graphing 
+biomass.mortality <- full_join(mortality.stocks, spawning.biomass.stocks, by = c("stockid", "year")) %>% 
+  filter(year > 1920)
+```
+
+Spawning biomass compared to mortality 
+```{r}
+# Spawning biomass compared to estimated mortality 
+spawning.mortality <- ggplot(biomass.mortality, aes(x = spawningbiomass, y = mortality)) +
+  geom_jitter(aes(color = as.numeric(year))) +
+  scale_color_gradient2(low = "red", high = "blue", mid = "grey", midpoint = 1970) +
+  facet_wrap(~stockid, scales = "free") +
+  theme_classic() +
+  labs(x = "Spawning Biomass", y = "Fishing Mortality", color = "Year")  +
+  geom_path(aes(colour = as.numeric(year)))
+  
+```
+
+```{r}
+# Filter out species from identified list not included in RAM Version 4.44 recruits dataframe 
+stocks.excluded.recruits <- fbram.mang.stocks %>% 
+filter(!stockid %in% c( "BTIPSHARATL", "BTIPSHARGM", "COBSATLC","GLGROUPSATLCGM", "LHAIRTSOJECS"))
+
+# Select for species included in RAM version 4.44 recruits dataset 
+recruits <- r.data %>% 
+  select(stocks.excluded.recruits$stockid) %>% 
+  tibble::rownames_to_column("year") %>% 
+  gather(stockid, recruit.count, -year)
+```
+
+
+Spawning biomass, mortality, and recruits plot 
+```{r}
+# unfinished recruits plot 
+biomass.mort.recruit <- ggplot() +
+  geom_line(recruits, mapping =  aes(y = recruit.count, x = year)) +
+  geom_line(biomass.mortality, mapping = aes(y = spawningbiomass, x = year))
+```
 

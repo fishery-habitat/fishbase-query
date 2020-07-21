@@ -1,6 +1,0 @@
-"0","# Use that list to query FishBase?
-eco <- fishbase(dataset = ""ecology"", species = ram.sp, cleaned = F)
-"
-"2","Error in names(object) <- nm : 
-  'names' attribute [9] must be the same length as the vector [2]
-"
