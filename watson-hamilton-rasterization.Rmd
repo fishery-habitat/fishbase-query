@@ -1,0 +1,63 @@
+---
+title: "seaaroundus-fishbase-queries.Rmd"
+author: "Kirby Bartlett"
+date: "7/22/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+#library(freeR) # where Chris Free's `fishbase` function lives
+library(tidyverse)
+#library(rfishbase)
+library(here)
+library(sf) # Stores information about the CRS and classes of the spatial data
+library(raster) # Package that deals with raster algebra
+library(rgdal) # Defining CRS
+
+```
+
+
+Set-Up for Downloading Data Using the "Maricultura" Google Drive File Stream
+```{r}
+# Create a Root to Extract Files 
+if(Sys.info()["sysname"] == "Windows"){ #If operating system is "Windows" use G: Drive
+  team_path <- "G:/"
+} else { # If it is not (i.e. Mac), use the Google Drive File Stream
+  team_path <- "/Volumes/GoogleDrive/.shortcut-targets-by-id/1GpvrcGzmRSROKwiSRhlx3wUH3WCLFULw/"
+}
+
+#Create the Full File Path
+path <- paste0(team_path, "fishery-habitat-project/Data/Raw_Data/")
+
+```
+
+```{r}
+watson2000.2004_ind <- read_csv("CatchInd2000_2004.csv") #read_csv(paste0(path,"CatchInd2000_2004.csv")) # Watson 2000-2004 industrial catch numbers
+cell_codes <- read_csv("Watson_CellCodes.csv") #read_csv(paste0(path,"Watson_CellCodes.csv")) # lat long for the center of each cell and which cell number it refers to
+
+# Join the spatial information with the cell codes for each location
+joined_ind_2000_2004 <- full_join(head(watson2000.2004_ind), cell_codes, by = "Cell") 
+
+
+# Assign the dataframe to be a spatial object by telling it the lat and long column names
+coordinates(joined_ind_2000_2004) <- ~LonCentre+LatCentre
+
+# Tell R it is a gridded patter if using Raster()
+#gridded(joined_ind_2000_2004) <- TRUE
+
+
+# Set up an 'empty' raster 
+r <- raster()
+
+# Rasterize the point data from the joined timeseries data onto the empty raster (empty raster has a global extent)
+raster_ind_2000_2004 <- rasterize(joined_ind_2000_2004, r, joined_ind_2000_2004$IUU)
+
+```
+
+```{r}
+
+Mangrove_2000 <- raster("a2000/a2000.tif")
+```
+
