@@ -1,0 +1,116 @@
+order,family,scientific name,common name,description,region,source
+Perciformes,Scaridae,Scarus guacamaia,rainbow parrotfish,functionally dependant on mangrove habitats; has experienced localized extinction after mangrove deforestation,Belize and Mexico,"Mumby et al. 2004 (D. Wesby, personal communication with Mumby)"
+Decapoda,Portunidae,family,blue crab,"""use mangroves as habitat during some part of life cycle"" - either permanent or temporary resident",Northern Mexico,Aburto-Oropeza et al. 2008
+Siluriformes,Ariidae,family,sea catfish,"""use mangroves as habitat during some part of life cycle"" - notes that majority use only as nursery grounds; does NOT provide any evidence for this claim",Northern Mexico,Aburto-Oropeza et al. 2008
+Perciformes,Haemulidae,family,grunts,"""use mangroves as habitat during some part of life cycle"" - notes that majority use only as nursery grounds; does NOT provide any evidence for this claim",Northern Mexico,Aburto-Oropeza et al. 2008
+Mugiliformes,Mugilidae,family,mullets,"""use mangroves as habitat during some part of life cycle"" - notes that majority use only as nursery grounds; does NOT provide any evidence for this claim",Northern Mexico,Aburto-Oropeza et al. 2008
+Perciformes,Gerreidae,family,mojarra,"""use mangroves as habitat during some part of life cycle"" - notes that majority use only as nursery grounds; does NOT provide any evidence for this claim",Northern Mexico,Aburto-Oropeza et al. 2008
+Perciformes,Lutjanidae,family,snappers,"""use mangroves as habitat during some part of life cycle"" - notes that majority use only as nursery grounds; does NOT provide any evidence for this claim",Northern Mexico,Aburto-Oropeza et al. 2008
+Perciformes,Centropomidae,family,snooks,"""use mangroves as habitat during some part of life cycle"" - notes that majority use only as nursery grounds; does NOT provide any evidence for this claim",Northern Mexico,Aburto-Oropeza et al. 2008
+Gonorynchiformes,Chanidae,family,milkfish,"""use mangroves as habitat during some part of life cycle"" - notes that majority use only as nursery grounds; does NOT provide any evidence for this claim",Northern Mexico,Aburto-Oropeza et al. 2008
+Perciformes,Haemulidae,Haemulon sciurus,bluestriped grunt,high dependence on mangrove and/or seagrass nurseries (based on mean fish densities),,Nagelkerken et al. 2002
+Perciformes,Lutjanidae,Lutjanus apodus,schoolmaster,high dependence on mangrove and/or seagrass nurseries (based on mean fish densities),,Nagelkerken et al. 2002
+Perciformes,Lutjanidae,Ocyurus chrysurus,yellowtail snapper,high dependence on mangrove and/or seagrass nurseries (based on mean fish densities),,Nagelkerken et al. 2002
+Perciformes,Scaridae,Scarus iserti,striped parrotfish,high dependence on mangrove and/or seagrass nurseries (based on mean fish densities),,Nagelkerken et al. 2002
+Perciformes,Gerreidae,Gerres cinereus,yellowfin mojarra,possible dependence on mangrove and/or seagrass nurseries (based on mean fish densities),,Nagelkerken et al. 2002
+Perciformes,Haemulidae,Haemulon plumieri,white grunt,possible dependence on mangrove and/or seagrass nurseries (based on mean fish densities),,Nagelkerken et al. 2002
+Perciformes,Lutjanidae,Lutjanus analis,mutton snapper,possible dependence on mangrove and/or seagrass nurseries (based on mean fish densities),,Nagelkerken et al. 2002
+Perciformes,Lutjanidae,Lutjanus griseus,gray snapper,possible dependence on mangrove and/or seagrass nurseries (based on mean fish densities),,Nagelkerken et al. 2002
+Perciformes,Scaridae,Scarus coeruleus,blue parrotfish,possible dependence on mangrove and/or seagrass nurseries (based on mean fish densities),,Nagelkerken et al. 2002
+Perciformes,Scaridae,Scarus guacamaia,rainbow parrotfish,possible dependence on mangrove and/or seagrass nurseries (based on mean fish densities),,Nagelkerken et al. 2002
+Perciformes,Sphyraenidae,Sphyraena barracuda,great barracuda,possible dependence on mangrove and/or seagrass nurseries (based on mean fish densities),,Nagelkerken et al. 2002
+,,Achirus lineatus,,"""highly mangrove-affiliated"" (>70% relative species density)",Atlantic East Pacific,zu Ermgassen et al. 2019
+,,Caranx latus ,,"""highly mangrove-affiliated"" (>70% relative species density)",Atlantic East Pacific,zu Ermgassen et al. 2019
+,,Centropomus undecimalis,,"""highly mangrove-affiliated"" (>70% relative species density)",Atlantic East Pacific,zu Ermgassen et al. 2019
+,,Cetengraulis edentulus,,"""highly mangrove-affiliated"" (>70% relative species density)",Atlantic East Pacific,zu Ermgassen et al. 2019
+,,Chaetodipterus faber,,"""highly mangrove-affiliated"" (>70% relative species density)",Atlantic East Pacific,zu Ermgassen et al. 2019
+,,Chaetodon capistratus ,,"""highly mangrove-affiliated"" (>70% relative species density)",Atlantic East Pacific,zu Ermgassen et al. 2019
+,,Diapterus auratus,,"""highly mangrove-affiliated"" (>70% relative species density); neritic/benthic",Atlantic East Pacific,zu Ermgassen et al. 2019
+,,Eucinostomus currani,,"""highly mangrove-affiliated"" (>70% relative species density)",Atlantic East Pacific,zu Ermgassen et al. 2019
+Perciformes,Gerreidae,Gerres cinereus ,yellowfin mojarra,"""highly mangrove-affiliated"" (>70% relative species density)",Atlantic East Pacific,zu Ermgassen et al. 2019
+Perciformes,Haemulidae,Haemulon flavolineatum,,"""highly mangrove-affiliated"" (>70% relative species density)",Atlantic East Pacific,zu Ermgassen et al. 2019
+Perciformes,Haemulidae,Haemulon parra ,,"""highly mangrove-affiliated"" (>70% relative species density)",Atlantic East Pacific,zu Ermgassen et al. 2019
+Perciformes,Haemulidae,Haemulon sciurus,bluestriped grunt,"""highly mangrove-affiliated"" (>70% relative species density)",Atlantic East Pacific,zu Ermgassen et al. 2019
+,,Lophogobius cyprinoides,,"""highly mangrove-affiliated"" (>70% relative species density); benthic/neritic",Atlantic East Pacific,zu Ermgassen et al. 2019
+Perciformes,Lutjanidae,Lutjanus analis (NT) ,mutton snapper,"""highly mangrove-affiliated"" (>70% relative species density)",Atlantic East Pacific,zu Ermgassen et al. 2019
+Perciformes,Lutjanidae,Lutjanus apodus,,"""highly mangrove-affiliated"" (>70% relative species density)",Atlantic East Pacific,zu Ermgassen et al. 2019
+Perciformes,Lutjanidae,Lutjanus cyanopterus (VU) ,,"""highly mangrove-affiliated"" (>70% relative species density)",Atlantic East Pacific,zu Ermgassen et al. 2019
+Perciformes,Lutjanidae,Lutjanus fulviflamma ,,"""highly mangrove-affiliated"" (>70% relative species density)",Atlantic East Pacific,zu Ermgassen et al. 2019
+Perciformes,Lutjanidae,Lutjanus griseus,gray snapper,"""highly mangrove-affiliated"" (>70% relative species density)",Atlantic East Pacific,zu Ermgassen et al. 2019
+Perciformes,Lutjanidae,Lutjanus jocu,,"""highly mangrove-affiliated"" (>70% relative species density)",Atlantic East Pacific,zu Ermgassen et al. 2019
+Perciformes,Lutjanidae,Lutjanus synagris (NT) ,,"""highly mangrove-affiliated"" (>70% relative species density)",Atlantic East Pacific,zu Ermgassen et al. 2019
+,,Mulloidichthys martinicus ,,"""highly mangrove-affiliated"" (>70% relative species density)",Atlantic East Pacific,zu Ermgassen et al. 2019
+Perciformes,Scaridae,Scarus guacamaia (NT),rainbow parrotfish,"""highly mangrove-affiliated"" (>70% relative species density)",Atlantic East Pacific,zu Ermgassen et al. 2019
+,,Sparisoma rubripinne ,,"""highly mangrove-affiliated"" (>70% relative species density)",Atlantic East Pacific,zu Ermgassen et al. 2019
+,,Stegastes leucostictus,,"""highly mangrove-affiliated"" (>70% relative species density)",Atlantic East Pacific,zu Ermgassen et al. 2019
+,,Anadara tuberculosa ,,"""highly mangrove-affiliated"" (>70% relative species density); benthic",Atlantic East Pacific,zu Ermgassen et al. 2019
+,,Ucides cordatus ,,"""highly mangrove-affiliated"" (>70% relative species density); terrestrial",Atlantic East Pacific,zu Ermgassen et al. 2019
+,,Ucides occidentalis,,"""highly mangrove-affiliated"" (>70% relative species density); terrestrial",Atlantic East Pacific,zu Ermgassen et al. 2019
+,,Atherinomorus lacunosus ,,"""highly mangrove-affiliated"" (>70% relative species density)",Indo West Pacific,zu Ermgassen et al. 2019
+,,Gerres filamentosus ,,"""highly mangrove-affiliated"" (>70% relative species density)",Indo West Pacific,zu Ermgassen et al. 2019
+Perciformes,Lutjanidae,Lutjanus argentimaculatus ,,"""highly mangrove-affiliated"" (>70% relative species density)",Indo West Pacific,zu Ermgassen et al. 2019
+Perciformes,Lutjanidae,Lutjanus argentiventris ,,"""highly mangrove-affiliated"" (>70% relative species density)",Indo West Pacific,zu Ermgassen et al. 2019
+Perciformes,Lutjanidae,Lutjanus russellii ,,"""highly mangrove-affiliated"" (>70% relative species density)",Indo West Pacific,zu Ermgassen et al. 2019
+,,Monodactylus argenteus ,,"""highly mangrove-affiliated"" (>70% relative species density)",Indo West Pacific,zu Ermgassen et al. 2019
+,,Siganus canaliculatus ,,"""highly mangrove-affiliated"" (>70% relative species density)",Indo West Pacific,zu Ermgassen et al. 2019
+,,Sillago sihama,,"""highly mangrove-affiliated"" (>70% relative species density)",Indo West Pacific,zu Ermgassen et al. 2019
+,,Terapon jarbua,,"""highly mangrove-affiliated"" (>70% relative species density)",Indo West Pacific,zu Ermgassen et al. 2019
+,,Cerithidea decollata ,,"""highly mangrove-affiliated"" (>70% relative species density); benthic",Indo West Pacific,zu Ermgassen et al. 2019
+,,Fenneropenaeus indicus ,,"""highly mangrove-affiliated"" (>70% relative species density); benthic",Indo West Pacific,zu Ermgassen et al. 2019
+,,Fenneropenaeus merguiensis ,,"""highly mangrove-affiliated"" (>70% relative species density); benthic",Indo West Pacific,zu Ermgassen et al. 2019
+,,Littoraria intermedia ,,"""highly mangrove-affiliated"" (>70% relative species density); terrestrial",Indo West Pacific,zu Ermgassen et al. 2019
+,,Littoraria pallescens ,,"""highly mangrove-affiliated"" (>70% relative species density); terrestrial",Indo West Pacific,zu Ermgassen et al. 2019
+,,Littorina scabra,,"""highly mangrove-affiliated"" (>70% relative species density); terrestrial",Indo West Pacific,zu Ermgassen et al. 2019
+,,Metaplax elegans ,,"""highly mangrove-affiliated"" (>70% relative species density); benthic",Indo West Pacific,zu Ermgassen et al. 2019
+,,Neosarmatium meinerti ,,"""highly mangrove-affiliated"" (>70% relative species density); terrestrial",Indo West Pacific,zu Ermgassen et al. 2019
+,,Penaeus monodon ,,"""highly mangrove-affiliated"" (>70% relative species density); benthic",Indo West Pacific,zu Ermgassen et al. 2019
+,,Scylla serrata ,,"""highly mangrove-affiliated"" (>70% relative species density); benthic",Indo West Pacific,zu Ermgassen et al. 2019
+,,Terebralia palustris ,,"""highly mangrove-affiliated"" (>70% relative species density): benthic/terrestrial",Indo West Pacific,zu Ermgassen et al. 2019
+,,Uca annulipes,,"""highly mangrove-affiliated"" (>70% relative species density): benthic/terrestrial",Indo West Pacific,zu Ermgassen et al. 2019
+,,Uca forcipata ,,"""highly mangrove-affiliated"" (>70% relative species density): benthic/terrestrial",Indo West Pacific,zu Ermgassen et al. 2019
+,,Uca inversa ,,"""highly mangrove-affiliated"" (>70% relative species density): benthic/terrestrial",Indo West Pacific,zu Ermgassen et al. 2019
+,,Uca urvillei,,"""highly mangrove-affiliated"" (>70% relative species density): benthic/terrestrial",Indo West Pacific,zu Ermgassen et al. 2019
+,,Chanos chanos ,,"""highly mangrove-affiliated"" (>70% relative species density): pelagic/neritic/benthic",Global,zu Ermgassen et al. 2019
+Perciformes,Sphyraenidae,Sphyraena barracuda,great barracuda,"""highly mangrove-affiliated"" (>70% relative species density)",Global,zu Ermgassen et al. 2019
+Carcharhiniformes,,Hemigaleus australiensis,Australian weasel shark,foraging,,Sievers et al. 2019: Blaber 1986
+Carcharhiniformes,,Carcharhinus melanopterus,blacktip reef shark,occurrence,,Sievers et al. 2019: Chin et al 2013
+Carcharhiniformes,,Carcharhinus limbatus,blacktip shark,"foraging, breeding, occurrence",,"Sievers et al. 2019: Foraging - Blaber 1986, Breeding - Heupel and Simpfendorfer 2002, Occurrene - White and Potter 2004"
+Carcharhiniformes,,Sphyrna tiburo,bonnethead shark,occurrence,,Sievers et al. 2019: Jennings et al. 2012
+Carcharhiniformes,,Carcharhinus leucas,bull shark,"breeding, occurrence",,"Sievers et al. 2019: Breeding - Matich and Heithaus 2014, Occurrence - Yeiser et al 2008 and Jennings et al 2012"
+Carcharhiniformes,,Isogomphodon oxyrhynchus,daggernose shark,occurrence,,Sievers et al. 2019: Lessa et al 1999
+Carcharhiniformes,,Negaprion brevirostris,lemon shark,"foraging, breeding, occurrence",,"Sievers et al. 2019: Foraging - Newman et al 2010, Breeding - Legarge et al. 2015 and Morgan et al. 2015, Occurrence - Guttridge et al. 2012 and Jennings et al. 2012"
+Carcharhiniformes,,Carcharhinus cautus,nervous shark,"foraging, occurrence",,"Sievers et al 2019: Foraging - Blaber 1986, Occurrence - Escalle et al 2015 and White and Potter 2004"
+Carcharhiniformes,,Glyphis garricki,Northern river shark,occurrence,,Sievers et al. 2019: Thorburn and MOrgan 2004
+Carcharhiniformes,,Negaprion acutidens,sharptooth lemon shark,"occurrence, foraging",,"Sievers et al. 2019: Foraging - Blaber 1986, Occurrence - White and Potter 2004"
+Carcharhiniformes,,Hemipristis elongata,snaggletooth shark,foraging,,Sievers et al. 2019: Blaber 1986
+Carcharhiniformes,,Glyphis glyphis,speartooth shark,occurrence,,Sievers et al. 2019: Peverell et al. 2006
+Mylobatiformes,,Himantura undulata,bleeker's variegated whipray,,,Sievers et al. 2019: IUCN Assessment
+Mylobatiformes,,Pastinachus atrus,broad cowtail ray,occurrence,,Sievers et al. 2019: Cerutti-Pereyra et al. 2014
+Mylobatiformes,,Maculabatis toshi,brown whipray,,,Sievers et al. 2019: IUCN Assessment
+Mylobatiformes,,Pastinachus sephen,cowtail ray,occurrence,,Sievers et al. 2019: White and Potter 2004
+Mylobatiformes,,Urotrygon nana,dwarf round stingray,,,Sievers et al. 2019: IUCN Assessment
+Mylobatiformes,,Pateobatis hortlei,hortle's whipray,,,Sievers et al. 2019: IUCN Assessment
+Mylobatiformes,,Himantura leoparda,leopard whipray,,,Sievers et al. 2019: IUCN Assessment
+Mylobatiformes,,Urogymnus granulata,mangrove whipray,occurrence,,Sievers et al. 2019: Davy et al. 2015
+Mylobatiformes,,Aetomylaeus vespertilio,ornate eagle ray,occurrence,,Sievers et al. 2019: White and Potter 2004
+Mylobatiformes,,Urogymnus asperrimus,porcupine ray,occurrence,,Sievers et al. 2019: Cerutti-Pereyra et al. 2014
+Mylobatiformes,,Himantura uarnak,reticulate whipray,occurrence,,"Sievers et al 2019: White and Potter 2004, Cerutti-Pereyra et al. 2014"
+Mylobatiformes,,Pastinachus solocirostris,roughnose stingray,,,Sievers et al. 2019: IUCN Assessment
+Mylobatiformes,,Maculabatis pastinacoides,round whipray,,,Sievers et al. 2019: IUCN Assessment
+Mylobatiformes,,Brevitrygon imbricata,scaly whipray,,,Sievers et al. 2019: IUCN Assessment
+Mylobatiformes,,Hypanus americanus,southern stingray,occurrence,,Sievers et al. 2019: Jennings et al. 2012
+Mylobatiformes,,Urogymnus lobistoma,tubemouth whipray,,,Sievers et al. 2019: IUCN Assessment
+Mylobatiformes,,Urobatis tumbesensis,tumbes round stingray,,,Sievers et al. 2019: IUCN Assessment
+Mylobatiformes,,Aeobatus narinari,whitespotted eagle rays,,,Sievers et al. 2019: Jennings et al. 2012
+Mylobatiformes,,Urobatis jamaicensis,yellow stingray,,,Sievers et al. 2019: Jennings et al. 2012
+Orectolobiformes,,Chiloscyllium arabicum,Arabian carpetshark,,,Sievers et al. 2019: IUCN Assessment
+Orectolobiformes,,Ginglymostoma cirratum,nurse shark,occurrence,,Sievers et al. 2019: Jennings et al. 2012
+Rhinopristiformes,,Pristis clavata,dwarf sawfish,occurrence,,Sievers et al. 2019: Peverell 2005
+Rhinopristiformes,,Glaucostegus typus,giant shovelnose ray,occurrence,,"Sievers et al. 2019: Cerutti-Pereyra et al. 2014, White and Potter 2004"
+Rhinopristiformes,,Rhinobatos penggali,Indonesian guitarfish,,,Sievers et al. 2019: IUCN Assessment
+Rhinopristiformes,,Pristis zijsron,green sawafish,"breeding, occurrence",,"Sievers et al. 2019: Breeding - Morgan et al. 2015, Occurrence - White and Potter 2004"
+Rhinopristiformes,,Pristis pristis,largetooth sawfish,occurrence,,Sievers et al. 2019: Peverell 2005
+Rhinopristiformes,,Anoxypristis cuspidata,narrow sawfish,occurrence,,Sievers et al. 2019: Peverell 2005
+Rhinopristiformes,,Pristis pectinata,smalltooth sawfish,"occurrence, breeding",,"Sievers et al. 2019: Papastamatiou et al. 2015, Guttridge et al. 2015, Jennings et al. 2012, Simpfendorfer et al 2010"
+Torpediniformes,,Narcine leoparda,leopard numbfish,,,Sievers et al. 2019: IUCN Assessment
+Crocodylia,,,,"occurrence, foraging, nesting, breeding",,Sievers et al 2019: see SI for specific reference list
