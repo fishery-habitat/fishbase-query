@@ -274,3 +274,39 @@ biomass.mort.recruit <- ggplot() +
   geom_line(biomass.mortality, mapping = aes(y = spawningbiomass, x = year))
 ```
 
+```{r}
+# These stocks do not have spawning biomass comparisons to their MSY targets 
+stocks.excluded.msy <- fbram.mang.stocks %>% 
+filter(!stockid %in% c("GLGROUPSATLCGM", "LHAIRTSOJECS","MULLQNSW", "BTIPSHARATL"))
+
+# Fishing mortality compared to the MSY fishing mortality target 
+fMSY <-  divf.data %>% 
+  select(stocks.excluded.msy$stockid) %>% 
+  tibble::rownames_to_column("year") %>% 
+  gather(stockid, mortality_msy, -year)
+
+# Spawning biomass compared to the spawning biomass MSY target
+spawning.biomass.MSY <- divssb.data %>% 
+  select(stocks.excluded.msy$stockid) %>% 
+  tibble::rownames_to_column("year") %>% 
+  gather(stockid, spawningbiomass_msy, -year)
+
+# Join the two MSY target comparison dataframes together for ease of graphing 
+spawn.mort.msy <- full_join(spawning.biomass.MSY, fMSY, by = c("stockid", "year")) %>% 
+  filter(year > 1920)
+```
+
+
+```{r}
+# Spawning biomass compared to estimated mortality 
+spawning.mortality <- ggplot(spawn.mort.msy, aes(x = spawningbiomass_msy, y = mortality_msy)) +
+  geom_jitter(aes(color = as.numeric(year))) +
+  scale_color_gradient2(low = "red", high = "blue", mid = "grey", midpoint = 1970) +
+  facet_wrap(~stockid, scales = "free") +
+  theme_classic() +
+  labs(x = "Spawning Biomass/Spawning Biomass MSY Target", y = "Fishing Mortality/Fishing Mortality MSY Target", color = "Year")  +
+  geom_path(aes(colour = as.numeric(year))) +
+  geom_vline(xintercept=1, linetype = "dashed") +
+  geom_hline(yintercept = 1, linetype = "dashed")
+```
+

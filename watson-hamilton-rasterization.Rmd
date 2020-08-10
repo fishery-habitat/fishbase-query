@@ -1,0 +1,74 @@
+---
+title: "seaaroundus-fishbase-queries.Rmd"
+author: "Kirby Bartlett"
+date: "7/22/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+#library(freeR) # where Chris Free's `fishbase` function lives
+library(tidyverse)
+#library(rfishbase)
+library(here)
+library(sf) # Stores information about the CRS and classes of the spatial data
+library(raster) # Package that deals with raster algebra
+library(rgdal) # Defining CRS
+
+```
+
+
+Set-Up for Downloading Data Using the Google Drive File Stream
+
+# Create a Root to Extract Files 
+if(Sys.info()["sysname"] == "Windows"){ #If operating system is "Windows" use G: Drive
+  team_path <- "G:/"
+} else { # If it is not (i.e. Mac), use the Google Drive File Stream
+  team_path <- "/Volumes/GoogleDrive/.shortcut-targets-by-id/1GpvrcGzmRSROKwiSRhlx3wUH3WCLFULw/"
+}
+
+#Create the Full File Path
+path <- paste0(team_path, "fishery-habitat-project/Data/Raw_Data/")
+
+
+
+```{r}
+
+# Read in downloaded Watson 2000-2004 industrial fishing data
+watson2000.2004_ind <- read_csv(paste0(team_path, "CatchInd2000_2004.csv"))
+
+
+# Read in the cell codes csv which includes lat/long info 
+cell_codes <- read_csv("CellCodes.csv")
+
+# Read in the index file 
+index_2000 <- read_csv("IndexInd.csv") %>% 
+  filter(Year = "2000")
+
+# Join the spatial information with the cell codes for each location
+joined_ind_2000_2004 <- full_join(watson2000.2004_ind, cell_codes, by = "Cell") %>% 
+  select(LonCentre, LatCentre, Reported, IUU, Discards, Cell, ID) %>% 
+  rename(Reported_ind = Reported,
+         IUU_ind = IUU,
+         Discards_ind = Discards)
+
+# Join together the index information with the catch/cell code information. Make sure longitude and latitude are the first two columns for plotting purposes.
+# Select for the columns that you want to be made into rasters
+index_catch_join <- full_join(joined_ind_2000_2004, index_2000, by = "ID") %>% 
+  select(LonCentre, LatCentre, Reported, IUUTotal, Discards, Reported_ind, IUU_ind)
+  
+
+# Raster from XYZ. Plot the lat/long information. It will make a raster for every column you have.
+ind_xyz_2000_2004 <- rasterFromXYZ(index_catch_join, crs = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs")
+
+# Assign column names to layer names
+names(ind_xyz_2000_2004) <- tail(colnames(index_catch_join), 3) 
+
+```
+
+```{r}
+# Read in tif of mangroves in Indonesia that was exported from ArcPro
+# Mangrove_2000 <- raster("a2000/a2000.tif")
+```
+
