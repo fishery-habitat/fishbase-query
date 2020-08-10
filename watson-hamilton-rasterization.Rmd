@@ -19,8 +19,8 @@ library(rgdal) # Defining CRS
 ```
 
 
-Set-Up for Downloading Data Using the "Maricultura" Google Drive File Stream
-```{r}
+Set-Up for Downloading Data Using the Google Drive File Stream
+
 # Create a Root to Extract Files 
 if(Sys.info()["sysname"] == "Windows"){ #If operating system is "Windows" use G: Drive
   team_path <- "G:/"
@@ -31,33 +31,44 @@ if(Sys.info()["sysname"] == "Windows"){ #If operating system is "Windows" use G:
 #Create the Full File Path
 path <- paste0(team_path, "fishery-habitat-project/Data/Raw_Data/")
 
-```
+
 
 ```{r}
-watson2000.2004_ind <- read_csv("CatchInd2000_2004.csv") #read_csv(paste0(path,"CatchInd2000_2004.csv")) # Watson 2000-2004 industrial catch numbers
-cell_codes <- read_csv("Watson_CellCodes.csv") #read_csv(paste0(path,"Watson_CellCodes.csv")) # lat long for the center of each cell and which cell number it refers to
+
+# Read in downloaded Watson 2000-2004 industrial fishing data
+watson2000.2004_ind <- read_csv(paste0(team_path, "CatchInd2000_2004.csv"))
+
+
+# Read in the cell codes csv which includes lat/long info 
+cell_codes <- read_csv("CellCodes.csv")
+
+# Read in the index file 
+index_2000 <- read_csv("IndexInd.csv") %>% 
+  filter(Year = "2000")
 
 # Join the spatial information with the cell codes for each location
-joined_ind_2000_2004 <- full_join(head(watson2000.2004_ind), cell_codes, by = "Cell") 
+joined_ind_2000_2004 <- full_join(watson2000.2004_ind, cell_codes, by = "Cell") %>% 
+  select(LonCentre, LatCentre, Reported, IUU, Discards, Cell, ID) %>% 
+  rename(Reported_ind = Reported,
+         IUU_ind = IUU,
+         Discards_ind = Discards)
 
+# Join together the index information with the catch/cell code information. Make sure longitude and latitude are the first two columns for plotting purposes.
+# Select for the columns that you want to be made into rasters
+index_catch_join <- full_join(joined_ind_2000_2004, index_2000, by = "ID") %>% 
+  select(LonCentre, LatCentre, Reported, IUUTotal, Discards, Reported_ind, IUU_ind)
+  
 
-# Assign the dataframe to be a spatial object by telling it the lat and long column names
-coordinates(joined_ind_2000_2004) <- ~LonCentre+LatCentre
+# Raster from XYZ. Plot the lat/long information. It will make a raster for every column you have.
+ind_xyz_2000_2004 <- rasterFromXYZ(index_catch_join, crs = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs")
 
-# Tell R it is a gridded patter if using Raster()
-#gridded(joined_ind_2000_2004) <- TRUE
-
-
-# Set up an 'empty' raster 
-r <- raster()
-
-# Rasterize the point data from the joined timeseries data onto the empty raster (empty raster has a global extent)
-raster_ind_2000_2004 <- rasterize(joined_ind_2000_2004, r, joined_ind_2000_2004$IUU)
+# Assign column names to layer names
+names(ind_xyz_2000_2004) <- tail(colnames(index_catch_join), 3) 
 
 ```
 
 ```{r}
-
-Mangrove_2000 <- raster("a2000/a2000.tif")
+# Read in tif of mangroves in Indonesia that was exported from ArcPro
+# Mangrove_2000 <- raster("a2000/a2000.tif")
 ```
 
